@@ -1,25 +1,33 @@
-## 0.0.0 Beginning of the project (2018.12.25)
+### 应用场景
+* 电梯门口，食堂电视机处
+
+### 主要功能
+* 识别人脸，精准推送活动信息
+  
 ********
-### Method and Techniques
-* 场景:　　
 
-  * 电梯门口
+## 0.0.1 Beginning of the project (2018.12.25)
+********
 
-* feature:
+### FEATURE:
   * 人脸扣取
   * 五官位置爬去
+  * 生成黑色背景人脸轮廓图片
 
+### ISSUE：
+  * 无法筛除不必要的人脸
 
-issue：
+### TODO:
 
 * 寻找更好的人脸识别模块, 小而精
   * testing 小于 1s
   * possible solution 1: Microsoft Azulu
-  * possible solution 2: Expand 
+  * possible solution 2: Enhance face_recognition
 
-* 如何筛除不必要的人脸
+* CNN只能处理图片，但不能处理视频流
+  * possible solution 1: 从视频截取
 
-TODO (寒假之前):
+### Group_Task (寒假之前):
 * Tech Team熟悉git/github多人协作流程, message规范 (参考slack上链接)
 * Python掌握廖雪峰菜鸟教程 内建模块 之前的内容
 * Python命名规范 (参考slack上链接)
