@@ -9,14 +9,6 @@ class Face(object):
         self.ary_image = []
         self.pil_image = 0
         self.face_landmarks = {}
-
-    def get_original_landmarks(self, points):
-
-        tmplist = [0] * 2
-        tmplist[0] = self.box[0] + points[0]
-        tmplist[1] = self.box[1] + points[1]
-
-        return tmplist
 class FaceId(object):
 
     def __init__ (self, img_location):
