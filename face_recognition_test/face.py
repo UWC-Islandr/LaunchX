@@ -60,7 +60,7 @@ class FaceId (object):
             for facial_feature in face_landmarks.keys():
                 print("The {} in this face has the following points: {}".format(facial_feature, face_landmarks[facial_feature]))
 
-    def _draw_facial_feature(self):
+    def _draw_facial_feature_on_img(self):
 
         d_image = ImageDraw.Draw(self.pil_image)
 
@@ -73,14 +73,31 @@ class FaceId (object):
         # Show the picture
         self.pil_image.show()
 
+    def _extract_facial_feature(self):
+
+        background_img = Image.new("RGB", ((self.box[2] - self.box[0]), (self.box[3] - self.box[1])))
+
+        d_black_img = ImageDraw.Draw(background_img)
+
+        for face_landmarks in self.face_landmarks_list:
+
+            for facial_feature in face_landmarks.keys():
+
+                d_black_img.line(face_landmarks[facial_feature], width = 3)
+
+        # Show the picture
+        background_img.show()
+
+
     def run(self):
 
         self._crop_face()
         self._get_face_landmarks()
-        self._draw_facial_feature()
+        self._draw_facial_feature_on_img()
+        self._extract_facial_feature()
 
 
 if __name__ == '__main__':
 
-    face = FaceId('pic/index.jpg')
+    face = FaceId('pic/sky.jpg')
     face.run()
