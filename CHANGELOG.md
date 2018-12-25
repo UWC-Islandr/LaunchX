@@ -6,7 +6,7 @@
   
 ********
 
-## 0.0.1 Beginning of the project (2018.12.25)
+## 0.1.0 Beginning of the project (2018.12.25)
 ********
 
 ### FEATURE:
@@ -16,6 +16,7 @@
 
 ### ISSUE：
   * 无法筛除不必要的人脸
+  * 图片大小需要规范化
 
 ### TODO:
 
