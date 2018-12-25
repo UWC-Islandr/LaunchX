@@ -77,6 +77,8 @@ class FaceId(object):
                 face.face_landmarks = face_recognition.face_landmarks(face.ary_image)[0]
             except IndexError:
                 print("No feature detected")
+                self.faces_list.remove(face)
+                continue
 
             for facial_feature in face.face_landmarks.keys():
                 print("The {} in this face has the following points: {}".format(facial_feature, face.face_landmarks[facial_feature]))
