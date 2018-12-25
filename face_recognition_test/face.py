@@ -9,14 +9,6 @@ class Face(object):
         self.ary_image = []
         self.pil_image = 0
         self.face_landmarks = {}
-
-    def get_original_landmarks(self, points):
-
-        tmplist = [0] * 2
-        tmplist[0] = self.box[0] + points[0]
-        tmplist[1] = self.box[1] + points[1]
-
-        return tmplist
 class FaceId(object):
 
     def __init__ (self, img_location):
@@ -77,6 +69,8 @@ class FaceId(object):
                 face.face_landmarks = face_recognition.face_landmarks(face.ary_image)[0]
             except IndexError:
                 print("No feature detected")
+                self.faces_list.remove(face)
+                continue
 
             for facial_feature in face.face_landmarks.keys():
                 print("The {} in this face has the following points: {}".format(facial_feature, face.face_landmarks[facial_feature]))
