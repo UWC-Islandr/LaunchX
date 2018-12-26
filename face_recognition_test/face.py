@@ -2,6 +2,8 @@ from PIL import Image, ImageDraw
 import face_recognition
 import numpy
 
+def save_image(img, name):
+    img.save("flow/"+name+".jpg")
 class Face(object):
 
     def __init__(self):
@@ -63,7 +65,8 @@ class FacesImage(object):
             face.pil_image = tmp_pil_image.crop(face.box)
             face.ary_image = numpy.array(face.pil_image)
             print(str(face.box))
-            # face.pil_image.show()
+            face.pil_image.show()
+            save_image(face.pil_image, str(numpy.random.randint(1, 1000)))
 
     def _get_face_landmarks(self):
 
@@ -90,7 +93,8 @@ class FacesImage(object):
                 d_image.line(face.face_landmarks[facial_feature], width = 3)
 
             # Show the picture
-            # face.pil_image.show()
+            face.pil_image.show()
+            save_image(face.pil_image, str(numpy.random.randint(1, 1000)))
 
 
     def _extract_facial_feature(self):
@@ -122,6 +126,7 @@ class FacesImage(object):
 
             blackbg_img.show()
             face.blackbg_img = blackbg_img
+            save_image(face.blackbg_img, str(numpy.random.randint(1, 1000)))
 
 
     def run(self):
@@ -134,5 +139,5 @@ class FacesImage(object):
 
 if __name__ == '__main__':
 
-    face_image = FacesImage('pic/group.jpg')
+    face_image = FacesImage('pic/index.jpg')
     face_image.run()
