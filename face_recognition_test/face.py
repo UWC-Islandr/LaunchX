@@ -9,7 +9,11 @@ class Face(object):
         self.ary_image = []
         self.pil_image = 0
         self.face_landmarks = {}
-class FaceId(object):
+        self.blackbg_img = 0
+        self.identity = -1
+
+    #TODO add face identification process, save the identity in self.indentity
+class FacesImage(object):
 
     def __init__ (self, img_location):
 
@@ -93,9 +97,9 @@ class FaceId(object):
 
         for face in self.faces_list:
 
-            background_img = Image.new("RGB", self.pil_image.size)
+            blackbg_img = Image.new("RGB", self.pil_image.size)
 
-            d_black_img = ImageDraw.Draw(background_img)
+            d_black_img = ImageDraw.Draw(blackbg_img)
 
             for facial_feature in face.face_landmarks.keys():
 
@@ -116,7 +120,8 @@ class FaceId(object):
 
             # Show the picture
 
-            background_img.show()
+            blackbg_img.show()
+            face.blackbg_img = blackbg_img
 
 
     def run(self):
@@ -129,5 +134,5 @@ class FaceId(object):
 
 if __name__ == '__main__':
 
-    faceid = FaceId('pic/group.jpg')
-    faceid.run()
+    face_image = FacesImage('pic/group.jpg')
+    face_image.run()
