@@ -1,20 +1,37 @@
 from PIL import Image, ImageDraw
 import face_recognition
 import numpy
+import hashlib
 
 def save_image(img, name):
     img.save("flow/"+name+".jpg")
 class Face(object):
 
     def __init__(self):
+
         self.box = [0] * 4
         self.ary_image = []
         self.pil_image = 0
         self.face_landmarks = {}
         self.blackbg_img = 0
-        self.identity = -1
+        self.identity = []
+        self.__hash_identity = -1
 
     #TODO add face identification process, save the identity in self.indentity
+    def face_identification(self):
+
+        try:
+
+            self.identity = face_recognition.face_encodings(self.ary_image)[0]
+            md5 = hashlib.md5()
+            md5.update(str(self.identity).encode('utf-8'))
+            self.__hash_identity = md5.hexdigest()
+            print(self.__hash_identity)
+        
+        except IndexError:
+
+            print("face_identification: No face detected")
+
 class FacesImage(object):
 
     def __init__ (self, img_location):
@@ -66,7 +83,7 @@ class FacesImage(object):
             face.ary_image = numpy.array(face.pil_image)
             print(str(face.box))
             face.pil_image.show()
-            save_image(face.pil_image, str(numpy.random.randint(1, 1000)))
+          
 
     def _get_face_landmarks(self):
 
@@ -94,10 +111,10 @@ class FacesImage(object):
 
             # Show the picture
             face.pil_image.show()
-            save_image(face.pil_image, str(numpy.random.randint(1, 1000)))
+        
 
 
-    def _extract_facial_feature(self):
+    def _draw_feature_map(self):
 
         for face in self.faces_list:
 
@@ -126,15 +143,27 @@ class FacesImage(object):
 
             blackbg_img.show()
             face.blackbg_img = blackbg_img
-            save_image(face.blackbg_img, str(numpy.random.randint(1, 1000)))
 
+    def _faces_identification(self):
+
+        for face in self.faces_list:
+
+            face.face_identification()
+
+            # print(face.identity)
 
     def run(self):
 
+        # crop faces in the image, store them in both array form and pil form
         self._crop_faces()
+
+        # extract and draw facial feature on faces, generate feature maps
         self._get_face_landmarks()
         self._draw_facial_feature_on_img()
-        self._extract_facial_feature()
+        self._draw_feature_map()
+
+        # identify faces, store hash value of face identity
+        self._faces_identification()
 
 
 if __name__ == '__main__':
