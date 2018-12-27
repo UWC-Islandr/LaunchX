@@ -3,8 +3,6 @@ import face_recognition
 import numpy
 import hashlib
 
-def save_image(img, name):
-    img.save("flow/"+name+".jpg")
 class Face(object):
 
     def __init__(self):
