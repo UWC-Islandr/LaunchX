@@ -93,6 +93,10 @@ class FacesImage(object):
 
     def _crop_faces(self):
 
+        """ use crop function in PIL module to crop the faces in the image and store them seperately in their attr
+
+        """
+
         face_locations = self._locate_faces()
         self._regularize_locations(face_locations)
 
