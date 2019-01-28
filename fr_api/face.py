@@ -4,6 +4,8 @@ from PIL import Image, ImageDraw
 import face_recognition as fr
 import numpy
 import hashlib
+import glob
+
 
 class Face(object):
 
@@ -105,8 +107,8 @@ class FacesImage(object):
         for face in self.faces_list:
             face.pil_image = tmp_pil_image.crop(face.box)
             face.ary_image = numpy.array(face.pil_image)
-            print(str(face.box))
-            face.pil_image.show()
+            # print(str(face.box))
+            # face.pil_image.show()
           
 
     def _get_face_landmarks(self):
@@ -121,8 +123,8 @@ class FacesImage(object):
                 self.faces_list.remove(face)
                 continue
 
-            for facial_feature in face.face_landmarks.keys():
-                print("The {} in this face has the following points: {}".format(facial_feature, face.face_landmarks[facial_feature]))
+            # for facial_feature in face.face_landmarks.keys():
+                # print("The {} in this face has the following points: {}".format(facial_feature, face.face_landmarks[facial_feature]))
 
     def _draw_facial_feature_on_img(self):
 
@@ -135,7 +137,7 @@ class FacesImage(object):
                 d_image.line(face.face_landmarks[facial_feature], width = 3)
 
             # Show the picture
-            face.pil_image.show()
+            # face.pil_image.show()
         
 
 
@@ -165,8 +167,9 @@ class FacesImage(object):
                 d_black_img.line(origin_landmarks, width = 3)
 
             # Show the picture
+            
 
-            face.blackbg_img.show()
+            # face.blackbg_img.show()
 
     def _faces_identification(self):
 
@@ -199,8 +202,32 @@ class FacesImage(object):
         # identify faces, store hash value of face identity
         self._faces_identification()
 
+    def show(self):
+
+        for face in self.faces_list:
+
+            face.blackbg_img.show()
+
+    def save(self, path):
+
+        for face in self.faces_list:
+
+            face.blackbg_img.save(path)
+
+
 
 if __name__ == '__main__':
 
-    face_image = FacesImage('pic/index.jpg')
-    face_image.run()
+    file_names = glob.glob(r'./pic/*.JPG')
+    file_names.sort()
+
+    print(file_names)
+
+    for file in file_names:
+
+        save_path = "feature/{}.png".format(file[6:10])
+        face_image = FacesImage(file)
+        face_image.run()
+        face_image.show()
+
+        # face.blackbg_img.save("feature/{}.png".format(self.index))
