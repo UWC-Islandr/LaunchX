@@ -44,7 +44,7 @@ class FacesImage(object):
         self.ary_image = fr.load_image_file(img_location)
         self.pil_image = Image.fromarray(self.ary_image)
         self.faces_list = []
-        self.index = index;
+        self.index = index
 
     def _locate_faces(self):
 
@@ -207,7 +207,7 @@ class FacesImage(object):
 if __name__ == '__main__':
 
     file_names = glob.glob(r'./pic/*.JPG')
-    file_names.sort();
+    file_names.sort()
 
     print(file_names)
 
