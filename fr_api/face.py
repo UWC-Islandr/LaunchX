@@ -39,12 +39,11 @@ class FacesImage(object):
         :attr: faces_list: a list that contains all the face objects that are located in the image
     """
 
-    def __init__ (self, img_location, index):
+    def __init__ (self, img_location):
 
         self.ary_image = fr.load_image_file(img_location)
         self.pil_image = Image.fromarray(self.ary_image)
         self.faces_list = []
-        self.index = index
 
     def _locate_faces(self):
 
@@ -168,7 +167,7 @@ class FacesImage(object):
                 d_black_img.line(origin_landmarks, width = 3)
 
             # Show the picture
-            face.blackbg_img.save("feature/{}.png".format(self.index))
+            
 
             # face.blackbg_img.show()
 
@@ -203,6 +202,19 @@ class FacesImage(object):
         # identify faces, store hash value of face identity
         self._faces_identification()
 
+    def show(self):
+
+        for face in self.faces_list:
+
+            face.blackbg_img.show()
+
+    def save(self, path):
+
+        for face in self.faces_list:
+
+            face.blackbg_img.save(path)
+
+
 
 if __name__ == '__main__':
 
@@ -212,6 +224,10 @@ if __name__ == '__main__':
     print(file_names)
 
     for file in file_names:
-        index = int(file[6:10])
-        face_image = FacesImage(file, index)
+
+        save_path = "feature/{}.png".format(file[6:10])
+        face_image = FacesImage(file)
         face_image.run()
+        face_image.show()
+
+        # face.blackbg_img.save("feature/{}.png".format(self.index))
