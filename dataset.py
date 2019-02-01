@@ -3,7 +3,7 @@ import glob
 
 if __name__ == '__main__':
 
-    file_names = glob.glob(r'./dataset/pic/*.JPG')
+    file_names = glob.glob(r'./dataset/pic/*.jpeg')
     file_names.sort()
 
     print(file_names)
