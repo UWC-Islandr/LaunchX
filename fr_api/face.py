@@ -210,9 +210,9 @@ class FacesImage(object):
 
     def save(self, path):
 
-        for face in self.faces_list:
+        # for face in self.faces_list:
 
-            face.blackbg_img.save(path)
+        self.faces_list[0].blackbg_img.save(path)
 
 
 
