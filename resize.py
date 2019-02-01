@@ -75,7 +75,7 @@ class ResizeImage(object):
         
 if __name__ == '__main__':
 
-    file_names = glob.glob(r'./dataset/pic/*.jpeg')
+    file_names = glob.glob(r'./dataset/pic/*.jpg')
     file_names.sort()
 
     print(file_names)
